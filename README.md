@@ -28,8 +28,8 @@ Export an App Search engine `parks` to a JSON file, `engine.json`.
 
 ```sh
 npm run index.js export-app-search-engine parks \
-  --app-search-endpoint "https://rkuzsma-8-6-jan-10.ent.us-central1.gcp.cloud.es.io" \
-  --app-search-private-key "private-rijnrwf17grbg9jg8m1zam9q" \
+  --app-search-endpoint "https://my-cloud-deployment.ent.us-central1.gcp.cloud.es.io" \
+  --app-search-private-key "private-REDACTED" \
   --output-json "engine.json"
 ```
 
@@ -37,7 +37,7 @@ Import an exported engine's settings from a file `engine.json` into a new engine
 
 ```sh
 npm run index.js import-app-search-engine new-parks \
-  --app-search-endpoint "https://rkuzsma-8-6-jan-10.ent.us-central1.gcp.cloud.es.io" \
-  --app-search-private-key "private-rijnrwf17grbg9jg8m1zam9q" \
+  --app-search-endpoint "https://my-cloud-deployment.ent.us-central1.gcp.cloud.es.io" \
+  --app-search-private-key "private-REDACTED" \
   --input-json "engine.json"
 ```
