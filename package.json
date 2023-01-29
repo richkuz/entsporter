@@ -1,0 +1,16 @@
+{
+  "name": "entsporter",
+  "version": "1.0.0",
+  "description": "An import export tool for Enterprise Search engine settings.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@elastic/enterprise-search": "^8.6.0",
+    "commander": "^10.0.0",
+    "node-fetch": "^2.6.8"
+  }
+}
