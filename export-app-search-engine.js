@@ -29,6 +29,7 @@ async function exportAppSearchEngine(engineName, options) {
   engineJson.schema = await exportSchema(client, engineName);
   engineJson.synonyms = await exportSynonyms(client, engineName);
   engineJson.curations = await exportCurations(client, engineName);
+  engineJson.searchSettings = await exportSearchSettings(client, engineName);
 
   console.log(`Writing engine JSON to file ${options.outputJson}`);
   await fs.writeFile(options.outputJson, JSON.stringify(engineJson, undefined, 2));
@@ -69,6 +70,15 @@ async function exportCurations(client, engineName) {
     console.warn("Only exporting first page of curations!");
   }
   return curations.results;
+}
+
+async function exportSearchSettings(client, engineName) {
+  const searchSettings = await client.app.getSearchSettings({engine_name: engineName});
+  if (searchSettings.errors) {
+    console.error(searchSettings.errors);
+    process.exit(1)
+  }
+  return searchSettings;
 }
 
 module.exports = exportAppSearchEngine;

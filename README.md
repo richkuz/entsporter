@@ -9,10 +9,12 @@ Import and export Elastic App Search engine configuration, including:
 * Schema configuration
 * Curations
 * Synonyms
-
-Coming soon:
-* Field weights and boosts
+* Field weights
+* Boosts
 * Result settings
+* Precision tuning setting
+
+Only tested with 8.6 App Search managed engines so far. It _probably_ works with versions as far back as 7.17.
 
 ## Installation
 

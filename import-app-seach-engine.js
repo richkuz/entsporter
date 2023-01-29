@@ -18,6 +18,7 @@ async function importAppSearchEngine(engineName, options) {
   await importSchema(client, engineName, engineJson);
   await importSynonyms(client, engineName, engineJson);
   await importCurations(client, engineName, engineJson);
+  await importSearchSettings(client, engineName, engineJson);
 }
 
 async function createEngine(client, engineName, engineJson) {
@@ -89,6 +90,31 @@ async function importCurations(client, engineName, engineJson) {
       process.exit(1)
     }
   });
+}
+
+async function importSearchSettings(client, engineName, engineJson) {
+  console.log(`Importing search settings`);
+  const searchSettings = {
+    engine_name: engineName,
+    body: {},
+  }
+  if (engineJson.searchSettings.search_fields) {
+    searchSettings.body.search_fields = engineJson.searchSettings.search_fields;
+  }
+  if (engineJson.searchSettings.result_fields) {
+    searchSettings.body.result_fields = engineJson.searchSettings.result_fields;
+  }
+  if (engineJson.searchSettings.boosts) {
+    searchSettings.body.boosts = engineJson.searchSettings.boosts;
+  }
+  if (engineJson.searchSettings.precision) {
+    searchSettings.body.precision = engineJson.searchSettings.precision;
+  }
+  const result = await client.app.putSearchSettings(searchSettings);
+  if (result.errors) {
+    console.error(result.errors)
+    process.exit(1)
+  }
 }
 
 module.exports = importAppSearchEngine;
