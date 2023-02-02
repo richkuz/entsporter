@@ -1,59 +1,6 @@
-# Entsporter
-
-An import export tool for Enterprise Search engine settings.
-
-<!-- sources: http://www.theargonath.cc/pictures/ents/ents.html https://cdn.player.one/sites/player.one/files/2016/02/01/enterprise-star-trek.jpg -->
-![Entsporter](/entsporter.png)
-
-Import and export Elastic App Search engine configuration, including:
-* Schema configuration
-* Curations
-* Synonyms
-* Field weights
-* Boosts
-* Result settings
-* Precision tuning setting
-
-Only tested with 8.6 App Search managed engines so far. It _probably_ works with versions as far back as 7.17.
-
-## Installation
-
-Clone this repo and run:
-
-```sh
-npm install
-```
-
-## Usage
-
-Export an App Search engine `parks` to a JSON file, `engine.json`.
-
-```sh
-npm run index.js export-app-search-engine parks -- \
-  --app-search-endpoint "https://my-cloud-deployment.ent.us-central1.gcp.cloud.es.io" \
-  --app-search-private-key "private-REDACTED" \
-  --output-json "engine.json"
-```
-
-Import an exported engine's settings from a file `engine.json` into a new engine, `new-parks`.
-
-```sh
-npm run index.js import-app-search-engine new-parks -- \
-  --app-search-endpoint "https://my-cloud-deployment.ent.us-central1.gcp.cloud.es.io" \
-  --app-search-private-key "private-REDACTED" \
-  --input-json "engine.json"
-```
-
-The script only allows importing the settings into a new engine that the script will create.
-It's not possible to use this script to import settings from one engine into another
-engine that already has content.
-
-## Example exported engine settings JSON output
-
-```json
 {
   "read_only": {
-    "name": "parks",
+    "name": "parks2",
     "type": "default",
     "language": null
   },
@@ -71,44 +18,38 @@ engine that already has content.
   },
   "synonyms": [
     {
-      "id": "syn-63d6e042a612f5da3c598f44",
+      "id": "syn-63d6f602a612f59ab3599155",
+      "synonyms": [
+        "luigi",
+        "mario"
+      ]
+    },
+    {
+      "id": "syn-63d6f602a612f5541559914b",
       "synonyms": [
         "laptop",
         "computer",
         "pc",
         "ipad"
       ]
-    },
-    {
-      "id": "syn-63d6e02da612f519b8598f3d",
-      "synonyms": [
-        "luigi",
-        "mario"
-      ]
     }
   ],
   "curations": [
     {
-      "id": "cur-63d6e012a612f5a3da598f2c",
-      "queries": [
-        "mountain"
-      ],
-      "promoted": [
-        "park_saguaro"
-      ],
-      "hidden": [
-        "park_rocky-mountain"
-      ]
-    },
-    {
-      "id": "cur-63d6df34a612f5ce8d598ef3",
+      "id": "cur-63d6f602a612f54391599156",
       "queries": [
         "park",
         "query2 with terms"
       ],
-      "promoted": [
-        "park_saguaro"
+      "promoted": [],
+      "hidden": []
+    },
+    {
+      "id": "cur-63d6f602a612f542a6599157",
+      "queries": [
+        "mountain"
       ],
+      "promoted": [],
       "hidden": []
     }
   ],
@@ -209,4 +150,3 @@ engine that already has content.
     "precision_enabled": true
   }
 }
-```
